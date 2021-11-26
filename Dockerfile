@@ -1,13 +1,17 @@
-FROM alpine:3
+FROM python:2
 
 LABEL io.claritytech.image.authors="manash@claritytech.io"
 
+RUN python --version
+# Python 2.7.18
 
-RUN apk add --no-cache curl rsync openssh && \
-    echo @edge http://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
-    echo @edge http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories && \
-    apk add --no-cache \
-    fabric --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
+RUN pip install 'fabric<2.0'
+
+# RUN apk add --no-cache curl rsync openssh && \
+#     echo @edge http://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
+#     echo @edge http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories && \
+#     apk add --no-cache \
+#     fabric --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
 
 # https://git.alpinelinux.org/aports/tree/testing/fabric/APKBUILD
 # fabric-2.6.0.tar.gz"
@@ -18,6 +22,7 @@ RUN apk add --no-cache curl rsync openssh && \
 # | Paramiko | 2.7.2    |
 # | Invoke   | 1.5.0    |
 # | Paramiko Cell  | Content Cell  |
+
 WORKDIR /app
 
 VOLUME /app
