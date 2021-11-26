@@ -23,6 +23,9 @@ RUN pip install 'fabric<2.0'
 # | Invoke   | 1.5.0    |
 # | Paramiko Cell  | Content Cell  |
 
+# TO ignore the CryptographyDeprecationWarning
+ENV PYTHONWARNINGS="ignore"
+
 WORKDIR /app
 
 VOLUME /app
