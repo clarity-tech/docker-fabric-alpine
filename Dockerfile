@@ -7,6 +7,11 @@ RUN python --version
 
 RUN pip install 'fabric<2.0'
 
+RUN apt-get update \
+    && apt-get install -y gosu curl ca-certificates zip unzip git \
+    && apt-get -y autoremove \
+    && apt-get clean \
+
 # RUN apk add --no-cache curl rsync openssh && \
 #     echo @edge http://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
 #     echo @edge http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories && \
