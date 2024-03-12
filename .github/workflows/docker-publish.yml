@@ -33,11 +33,6 @@ jobs:
       contents: read
       packages: write
 
-    strategy:
-      fail-fast: true
-      matrix:
-        arch: [linux/amd64, linux/arm64]
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -83,7 +78,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          platforms: ${{ matrix.arch }}
+          platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
